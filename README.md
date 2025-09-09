@@ -3,7 +3,7 @@
 * **Course ID:** 202610
 * **CRN:** 14877
 * **Semester:** Fall 2025
-***
+
 # Library Management System (Module 3 Assignment)
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white) ![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)
 
@@ -24,5 +24,3 @@ This plan also documents how the system will be implemented step by step, how
 risks and constraints will be addressed, and how testing will validate functionality. 
 Together, these elements form a complete roadmap for building a reliable, maintainable 
 system that meets user expectations while adhering to project constraints.
-
-
