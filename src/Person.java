@@ -44,4 +44,9 @@ public class Person {
         this.address = address;
     }
 
+    @Override
+    public String toString() {
+        return String.format("First Name: %s\nLast Name: %s\nPhone: %s\nAddress: %s\n", this.firstName, this.lastName, this.phoneNumber, this.address);
+    }
+
 }
