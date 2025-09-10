@@ -26,4 +26,9 @@ public class Patron extends Person{
     public void setBookList(ArrayList<Book> bookList) {
         this.bookList = bookList;
     }
+
+    @Override
+    public String toString() {
+        return "Patron{" + "UID=" + UID + ", bookList=" + bookList + '}';
+    }
 }
