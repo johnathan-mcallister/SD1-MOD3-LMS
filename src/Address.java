@@ -1,16 +1,19 @@
 public class Address {
 
-    private String city;
+    private String unitNumber;
     private String street;
-    private String zip;
+    private String city;
     private String state;
+    private String zip;
     private String country;
 
-    public Address(String city, String street, String zip, String state, String country) {
-        this.city = city;
+    public Address(String unit, String city, String street, String zip, String state, String country) {
+
+        this.unitNumber = unit;
         this.street = street;
-        this.zip = zip;
+        this.city = city;
         this.state = state;
+        this.zip = zip;
         this.country = country;
     }
 
@@ -53,4 +56,9 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s\n%s, %s %s\n", this.unitNumber, this.street, this.city, this.state, this.zip);
+    };
 }
