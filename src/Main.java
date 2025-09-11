@@ -64,11 +64,14 @@ public class Main {
             String response = input.nextLine();
             try {
                 choice = Integer.parseInt(response);
+                if (choice < 1 || choice > 4) {
+                    System.out.println("Input must be between 1 and 4.");
+                }
             } catch (NumberFormatException e) {
-                System.out.printf("%s is an Invalid input!\n", response);
+                System.out.printf("'%s' is an invalid input! Please enter a number.%n", response);
+                choice = 0;
             }
-
-        } while (choice == 0);
+        } while (choice < 1 || choice > 4);
         return choice;
     }
 
@@ -89,11 +92,14 @@ public class Main {
             String response = input.nextLine();
             try {
                 choice = Integer.parseInt(response);
+                if (choice < 1 || choice > 4) {
+                    System.out.println("Input must be between 1 and 4.");
+                }
             } catch (NumberFormatException e) {
-                System.out.printf("%s is an Invalid input!\n", response);
+                System.out.printf("'%s' is an invalid input! Please enter a number.%n", response);
+                choice = 0;
             }
-
-        } while (choice == 0);
+        } while (choice < 1 || choice > 4);
         return choice;
     }
 }
