@@ -117,4 +117,88 @@ public class Main {
             }
         } while (choice != 4);
     }
+    public static void runBookMenu(Scanner input) {
+        //System.out.println("\033[h\033[2J");
+        //System.out.flush();
+        System.out.println("*************************************");
+        System.out.println("************* [ BOOKS ] *************");
+        System.out.println("*************************************");
+        System.out.println("1. Add Book");
+        System.out.println("2. Remove Book");
+        System.out.println("3. Retrieve List of Books");
+        System.out.println("4. Exit");
+        System.out.println("*************************************");
+        int choice = 0;
+        do {
+            System.out.println("Please choose an option from above to proceed:");
+            String response = input.nextLine();
+            try {
+                choice = Integer.parseInt(response);
+                if (choice < 1 || choice > 4) {
+                    System.out.println("Input must be between 1 and 4.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.printf("'%s' is an invalid input! Please enter a number.%n", response);
+                choice = 0;
+            }
+            switch (choice) {
+                case 1:
+                    System.out.println("Add Book");
+                    break;
+                case 2:
+                    System.out.println("Remove Book");
+                    break;
+                case 3:
+                    System.out.println("List All Books");
+                    break;
+                case 4:
+                    System.out.println("Returning to Main Menu...");
+                    break;
+                default:
+                    System.out.println("Invalid selection. Try again.");
+            }
+        } while (choice != 4);
+    }
+    public static void runTransactionMenu(Scanner input) {
+        //System.out.println("\033[h\033[2J");
+        //System.out.flush();
+        System.out.println("*************************************");
+        System.out.println("********* [ TRANSACTIONS ] **********");
+        System.out.println("*************************************");
+        System.out.println("1. Check-Out");
+        System.out.println("2. Check-In");
+        System.out.println("3. Pay Fines");
+        System.out.println("4. Exit");
+        System.out.println("*************************************");
+        int choice = 0;
+        do {
+            System.out.println("Please choose an option from above to proceed:");
+            String response = input.nextLine();
+            try {
+                choice = Integer.parseInt(response);
+                if (choice < 1 || choice > 4) {
+                    System.out.println("Input must be between 1 and 4.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.printf("'%s' is an invalid input! Please enter a number.%n", response);
+                choice = 0;
+            }
+            switch (choice) {
+                case 1:
+                    System.out.println("Check-Out");
+                    break;
+                case 2:
+                    System.out.println("Check-In");
+                    break;
+                case 3:
+                    System.out.println("Pay Fines");
+                    break;
+                case 4:
+                    System.out.println("Returning to Main Menu...");
+                    break;
+                default:
+                    System.out.println("Invalid selection. Try again.");
+            }
+        } while (choice != 4);
+    }
 }
