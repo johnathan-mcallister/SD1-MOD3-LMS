@@ -99,6 +99,22 @@ public class Main {
                 System.out.printf("'%s' is an invalid input! Please enter a number.%n", response);
                 choice = 0;
             }
-        } while (choice < 1 || choice > 4);
+            switch (choice) {
+                case 1:
+                    System.out.println("Add Patron");
+                    break;
+                case 2:
+                    System.out.println("Remove Patron");
+                    break;
+                case 3:
+                    System.out.println("List All Patrons");
+                    break;
+                case 4:
+                    System.out.println("Returning to Main Menu...");
+                    break;
+                default:
+                    System.out.println("Invalid selection. Try again.");
+            }
+        } while (choice != 4);
     }
 }
