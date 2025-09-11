@@ -75,7 +75,7 @@ public class Main {
         return choice;
     }
 
-    public static int runPatronMenu(Scanner input) {
+    public static void runPatronMenu(Scanner input) {
         //System.out.println("\033[h\033[2J");
         //System.out.flush();
         System.out.println("*************************************");
@@ -100,6 +100,5 @@ public class Main {
                 choice = 0;
             }
         } while (choice < 1 || choice > 4);
-        return choice;
     }
 }
