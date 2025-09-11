@@ -16,26 +16,36 @@ import java.util.Scanner;
 
 public class Main {
 
-
-
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-
-        System.out.printf("Hello What is your name?\n");
-        String name = input.nextLine();
-        System.out.printf("Welcome %s!", name);
+        System.out.println("LIBRARY MANAGEMENT SYSTEM");
+        mainMenu(input);
 
     }
 
-    public static int menu(Scanner input) {
-        System.out.printf("MAIN MENU\n");
+    public static int mainMenu(Scanner input) {
+        System.out.println("\033[h\033[2J");
+        System.out.flush();
+        System.out.println("*************************************");
+        System.out.println("MAIN MENU");
+        System.out.println("*************************************");
+        System.out.println("1. Patrons");
+        System.out.println("2. Books");
+        System.out.println("3. Transactions");
+        System.out.println("4. Exit");
+        System.out.println("*************************************");
         int choice = 0;
-        while(choice < 1 || choice > 3) {
-            System.out.printf("Choose a number between 1 and 3: \n");
-            choice = input.nextLine();
+        do {
+            System.out.println("Please choose an option from above to proceed:");
+            String response = input.nextLine();
+            try {
+                choice = Integer.parseInt(response);
+            } catch (NumberFormatException e) {
+                System.out.printf("%s is an Invalid input!\n", response);
+            }
 
-        }
+        } while (choice == 0);
         return choice;
     }
 }
