@@ -1,7 +1,6 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Patron extends Person{
 
@@ -113,10 +112,15 @@ public class Patron extends Person{
         return this.bookList; // return the updated list
     }
 
+    public int compareTo(Patron other) {
+        int last = this.lastName.compareToIgnoreCase(other.lastName);
+        if (last != 0) return last;
+        return this.firstName.compareToIgnoreCase(other.firstName);
+    }
+
     @Override
     public String toString() {
-        return String.format("UID: %s\nNAME: %s, %s\nPHONE: %s\n%s\nBALANCE: $%s\nBOOKLIST: %s",this.UID, super.lastName, super.firstName, super.phoneNumber, super.address, df.format(this.odFine), this.bookList);
-        //return String.format("[%s] %s, %s - %s",this.UID, super.lastName, super.firstName, super.phoneNumber);
+        return String.format("[%s] %s, %s - %s",this.UID, super.lastName, super.firstName, super.phoneNumber);
     }
 
     public String toStringFull() {
