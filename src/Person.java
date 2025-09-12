@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Person {
+public abstract class Person implements Comparable<Person> {
 
     public String firstName;
     public String lastName;
@@ -13,6 +13,19 @@ public class Person {
         setLastName();
         setPhoneNumber();
         setAddress();
+    }
+
+    public Person(String type) {
+        if (type.equalsIgnoreCase("author")) {
+            setFirstName();
+            setLastName();
+        } else {
+            setFirstName();
+            setLastName();
+            setPhoneNumber();
+            setAddress();
+        }
+
     }
 
     public String getFirstName() {
@@ -48,6 +61,12 @@ public class Person {
 
     public void setAddress() {
         this.address = new Address();
+    }
+
+    public int compareTo(Person other) {
+        int last = this.lastName.compareToIgnoreCase(other.lastName);
+        if (last != 0) return last;
+        return this.firstName.compareToIgnoreCase(other.firstName);
     }
 
     @Override
