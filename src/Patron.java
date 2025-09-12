@@ -1,15 +1,18 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.text.DecimalFormat;
 
 public class Patron extends Person{
 
     private String UID;
     private double odFine;
     private ArrayList<Book> bookList;
-    final Scanner input = new Scanner(System.in);
-    final DecimalFormat df = new DecimalFormat("0.00");
+    private Boolean IS_BLOCKED = false;
+    private static final double MAX_FINE = 250.00;
+    private final Scanner input = new Scanner(System.in);
+    private final DecimalFormat df = new DecimalFormat("0.00");
+
 
     public Patron(String firstName, String lastName, String phoneNumber, Address address, ArrayList<Patron> patronList) {
         super(firstName, lastName, phoneNumber, address);
@@ -22,6 +25,7 @@ public class Patron extends Person{
         return this.UID;
     }
 
+    // Generates a 7 character String with a consecutive number that grows as the list of patrons grows
     public String generateUID(ArrayList<Patron> patronList) {
         if (patronList == null) {
             return "LP00001";
@@ -49,8 +53,39 @@ public class Patron extends Person{
         this.odFine = odFine;
     }
 
-    public void addODFine(double odFine) {
-        this.odFine += odFine;
+    // Ensures that the Balance never exceeds the MAX_FINE value
+    public double addODFine(double newFine) {
+        if (this.odFine + newFine >= MAX_FINE) {
+            this.IS_BLOCKED = true;
+            System.out.printf("Fine limit reached. Current fines: $%s. Cannot exceed $%s\nNew Fines incurred at this point will be forgiven,\nhowever the Patron will not be allowed to check out new books until the balance has been satisfied", df.format(odFine), df.format(MAX_FINE));
+        } else{
+            this.odFine += newFine;
+        }
+        return getODFine();
+    }
+
+    // recursive to ensure a proper integer/double value is entered
+    public double subODFine(double payment) {
+        if (payment <= this.odFine) {
+            this.odFine -= payment;
+        } else {
+            if (this.odFine == 0.0) {
+                System.out.printf("The Balance for %s, %s has already been satisfied.\n", super.firstName, super.lastName);
+                if (this.IS_BLOCKED) {
+                    this.IS_BLOCKED = false;
+                }
+            } else {
+                System.out.println("Please enter an amount less than or equal to " + this.odFine);
+                try {
+                    System.out.println("Enter an amount here: ");
+                    subODFine(input.nextDouble());
+                } catch (InputMismatchException e) {
+                    System.out.println("Please enter an integer");
+                    subODFine(input.nextDouble());
+                }
+            }
+        }
+        return getODFine();
     }
 
     public ArrayList<Book> getBookList() {
