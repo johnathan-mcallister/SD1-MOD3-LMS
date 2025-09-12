@@ -96,6 +96,24 @@ public class Patron extends Person{
         this.bookList = bookList;
     }
 
+    public ArrayList<Book> addBook(Book book) {
+        this.bookList.add(book);
+        return this.bookList;
+    }
+
+    public ArrayList<Book> removeBook(Book book) {
+        if (this.bookList.contains(book)) {
+            this.bookList.remove(book);
+            System.out.printf("%s by %s [%s] has been returned.\n",
+                    book.getTitle(), book.getAuthor(), book.getBookId());
+        } else {
+            System.out.printf("Book with ID %s is not currently checked out.%n",
+                    book.getBookId());
+        }
+
+        return this.bookList; // return the updated list
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s, %s - %s",this.UID, super.lastName, super.firstName, super.phoneNumber);
