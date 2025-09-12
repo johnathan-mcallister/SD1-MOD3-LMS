@@ -75,6 +75,6 @@ public class Address {
 
     @Override
     public String toString() {
-        return String.format("%s %s\n%s, %s %s\n", this.unitNumber, this.street, this.city, this.state, this.zip);
+        return String.format("ADDRESS:\n    %s %s\n    %s, %s %s", this.unitNumber, this.street, this.city, this.state.toUpperCase(), this.zip);
     };
 }
