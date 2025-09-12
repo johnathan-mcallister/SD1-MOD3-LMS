@@ -4,7 +4,7 @@ public class Author extends Person {
     private ArrayList<Book> bodyOfWork;
 
     public Author(String firstName, String lastName, String phoneNumber, Address address, ArrayList<Book> bodyOfWork) {
-        super(firstName, lastName, phoneNumber, address);
+        super();
         this.bodyOfWork = new ArrayList<Book>(bodyOfWork);
     }
 
