@@ -20,6 +20,7 @@ public class TestClass {
             System.out.println("*************************************");
             System.out.println("************ [ PATRONS ] ************");
             System.out.println("*************************************");
+            System.out.println("1. Import Patron");
             System.out.println("1. Add Patron");
             System.out.println("2. Remove Patron");
             System.out.println("3. Retrieve List of Patrons");
@@ -43,7 +44,28 @@ public class TestClass {
                     System.out.println(newPatron);
                     break;
                 case 2:
-                    System.out.println("Remove Patron");
+                    System.out.print("Enter the Patron ID of the patron you would like to remove: ");
+                    String removePatronID = input.nextLine().trim();
+
+                    boolean removed = false;
+                    for (int i = 0; i < patronList.size(); i++) {
+                        Patron p = patronList.get(i);
+                        if (p.getUID().equalsIgnoreCase(removePatronID)) {
+                            patronList.remove(i);
+                            removed = true;
+                            break; // stop after removing the first match
+                        }
+                    }
+
+                    if (removed) {
+                        System.out.printf("Patron [%s] has been removed from the list.%n", removePatronID);
+                    } else {
+                        System.out.println("Patron Not Found");
+                    }
+
+                    if (!patronList.isEmpty()) {
+                        patronList.forEach(System.out::println);
+                    }
                     break;
                 case 3:
                     Collections.sort(patronList);
