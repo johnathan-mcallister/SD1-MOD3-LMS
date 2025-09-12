@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class TestClass {
@@ -11,18 +13,18 @@ public class TestClass {
     }
 
     public static void runPatronMenu() {
-        //System.out.println("\033[h\033[2J");
-        //System.out.flush();
-        System.out.println("*************************************");
-        System.out.println("************ [ PATRONS ] ************");
-        System.out.println("*************************************");
-        System.out.println("1. Add Patron");
-        System.out.println("2. Remove Patron");
-        System.out.println("3. Retrieve List of Patrons");
-        System.out.println("4. Exit");
-        System.out.println("*************************************");
         int choice = 0;
         do {
+            //System.out.println("\033[h\033[2J");
+            //System.out.flush();
+            System.out.println("*************************************");
+            System.out.println("************ [ PATRONS ] ************");
+            System.out.println("*************************************");
+            System.out.println("1. Add Patron");
+            System.out.println("2. Remove Patron");
+            System.out.println("3. Retrieve List of Patrons");
+            System.out.println("4. Exit");
+            System.out.println("*************************************");
             System.out.println("Please choose an option from above to proceed:");
             String response = input.nextLine();
             try {
@@ -44,7 +46,13 @@ public class TestClass {
                     System.out.println("Remove Patron");
                     break;
                 case 3:
-                    System.out.println("List All Patrons");
+                    Collections.sort(patronList);
+
+                    if (!patronList.isEmpty()) {
+                        for (Patron patron : patronList) {
+                            System.out.println(patron);
+                        }
+                    }
                     break;
                 case 4:
                     System.out.println("Returning to Main Menu...");
