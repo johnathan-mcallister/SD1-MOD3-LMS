@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Address {
 
     private String unitNumber;
@@ -6,55 +8,69 @@ public class Address {
     private String state;
     private String zip;
     private String country;
+    private static final Scanner input = new Scanner(System.in);
 
-    public Address(String unit, String city, String street, String zip, String state, String country) {
+    public Address() {
+        setUnitNumber();
+        setStreet();
+        setCity();
+        setState();
+        setZip();
+        setCountry();
+    }
 
-        this.unitNumber = unit;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.country = country;
+    public String getUnitNumber() {
+        return this.unitNumber;
+    }
+
+    public void setUnitNumber() {
+        System.out.println("Unit Number:");
+        this.unitNumber = input.nextLine();
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCity() {
+        System.out.println("City:");
+        this.city = input.nextLine();
     }
 
     public String getStreet() {
-        return street;
+        return this.street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setStreet() {
+        System.out.println("Street:");
+        this.street = input.nextLine();
     }
 
     public String getZip() {
-        return zip;
+        return this.zip;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setZip() {
+        System.out.println("Zip Code:");
+        this.zip = input.nextLine();
     }
 
     public String getState() {
-        return state;
+        return this.state;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setState() {
+        System.out.println("State:");
+        this.state = input.nextLine();
     }
 
     public String getCountry() {
-        return country;
+        return this.country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountry() {
+        System.out.println("Country:");
+        this.country = input.nextLine();
     }
 
     @Override
