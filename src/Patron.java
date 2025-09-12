@@ -29,13 +29,13 @@ public class Patron extends Person{
         if (patronList == null || patronList.isEmpty()) {
             return "LP00001";
         } else {
-            int max = Integer.parseInt(patronList.getFirst().UID);
+            int max = Integer.parseInt(patronList.getFirst().getUID().substring(2));
             for (Patron patron : patronList) {
-                if (Integer.parseInt(patron.getUID()) > max) {
+                if (Integer.parseInt(patron.getUID().substring(2)) > max) {
                     max = Integer.parseInt(patron.getUID());
                 }
             }
-            max += 1;
+            max++;
             return String.format("LP%05d", max);
         }
     }
