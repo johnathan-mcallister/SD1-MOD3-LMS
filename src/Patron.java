@@ -10,12 +10,11 @@ public class Patron extends Person{
     private ArrayList<Book> bookList;
     private Boolean IS_BLOCKED = false;
     private static final double MAX_FINE = 250.00;
-    private final Scanner input = new Scanner(System.in);
     private final DecimalFormat df = new DecimalFormat("0.00");
 
 
-    public Patron(String firstName, String lastName, String phoneNumber, Address address, ArrayList<Patron> patronList) {
-        super(firstName, lastName, phoneNumber, address);
+    public Patron(ArrayList<Patron> patronList) {
+        super();
         this.UID = generateUID(patronList);
         this.odFine = 0.0;
         this.bookList = new ArrayList<>();
@@ -27,7 +26,7 @@ public class Patron extends Person{
 
     // Generates a 7 character String with a consecutive number that grows as the list of patrons grows
     public String generateUID(ArrayList<Patron> patronList) {
-        if (patronList == null) {
+        if (patronList == null || patronList.isEmpty()) {
             return "LP00001";
         } else {
             int max = Integer.parseInt(patronList.getFirst().UID);
@@ -116,7 +115,8 @@ public class Patron extends Person{
 
     @Override
     public String toString() {
-        return String.format("[%s] %s, %s - %s",this.UID, super.lastName, super.firstName, super.phoneNumber);
+        return String.format("UID: %s\nNAME: %s, %s\nPHONE: %s\n%s\nBALANCE: $%s\nBOOKLIST: %s",this.UID, super.lastName, super.firstName, super.phoneNumber, super.address, df.format(this.odFine), this.bookList);
+        //return String.format("[%s] %s, %s - %s",this.UID, super.lastName, super.firstName, super.phoneNumber);
     }
 
     public String toStringFull() {
