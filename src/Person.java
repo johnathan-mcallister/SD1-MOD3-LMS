@@ -1,9 +1,9 @@
 public class Person {
 
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private Address address;
+    public String firstName;
+    public String lastName;
+    public String phoneNumber;
+    public Address address;
 
     public Person(String fName, String lName, String phone, Address address) {
         this.firstName = fName;
