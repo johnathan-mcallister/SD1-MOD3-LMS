@@ -16,24 +16,25 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static final Scanner input = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
 
         System.out.println("**************************************************************************");
         System.out.println("LIBRARY MANAGEMENT SYSTEM");
 
         int mainChoice;
         do {
-            mainChoice = mainMenu(input);
+            mainChoice = mainMenu();
             switch (mainChoice) {
                 case 1:
-                    runPatronMenu(input);
+                    runPatronMenu();
                     break;
                 case 2:
-                    runBookMenu(input);
+                    runBookMenu();
                     break;
                 case 3:
-                    runTransactionMenu(input);
+                    runTransactionMenu();
                     break;
                 case 4:
                     System.out.println("Goodbye.");
@@ -48,7 +49,7 @@ public class Main {
         System.out.println("Exit Code Given");
     }
 
-    public static int mainMenu(Scanner input) {
+    public static int mainMenu(){
         //System.out.println("\033[h\033[2J");
         //System.out.flush();
         System.out.println("*************************************");
@@ -76,7 +77,7 @@ public class Main {
         return choice;
     }
 
-    public static void runPatronMenu(Scanner input) {
+    public static void runPatronMenu() {
         //System.out.println("\033[h\033[2J");
         //System.out.flush();
         System.out.println("*************************************");
@@ -118,7 +119,7 @@ public class Main {
             }
         } while (choice != 4);
     }
-    public static void runBookMenu(Scanner input) {
+    public static void runBookMenu() {
         //System.out.println("\033[h\033[2J");
         //System.out.flush();
         System.out.println("*************************************");
@@ -160,7 +161,7 @@ public class Main {
             }
         } while (choice != 4);
     }
-    public static void runTransactionMenu(Scanner input) {
+    public static void runTransactionMenu() {
         //System.out.println("\033[h\033[2J");
         //System.out.flush();
         System.out.println("*************************************");
