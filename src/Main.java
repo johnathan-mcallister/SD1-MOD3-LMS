@@ -119,6 +119,7 @@ public class Main {
             }
         } while (choice != 4);
     }
+
     public static void runBookMenu() {
         //System.out.println("\033[h\033[2J");
         //System.out.flush();
@@ -161,6 +162,7 @@ public class Main {
             }
         } while (choice != 4);
     }
+
     public static void runTransactionMenu() {
         //System.out.println("\033[h\033[2J");
         //System.out.flush();
