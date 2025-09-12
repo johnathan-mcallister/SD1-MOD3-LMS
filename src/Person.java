@@ -1,47 +1,53 @@
+import java.util.Scanner;
+
 public class Person {
 
     public String firstName;
     public String lastName;
     public String phoneNumber;
     public Address address;
+    public final Scanner input = new Scanner(System.in);
 
-    public Person(String fName, String lName, String phone, Address address) {
-        this.firstName = fName;
-        this.lastName = lName;
-        this.phoneNumber = phone;
-        this.address = address;
+    public Person() {
+        setFirstName();
+        setLastName();
+        setPhoneNumber();
+        setAddress();
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName() {
+        System.out.println("First Name:");
+        this.firstName = input.nextLine();
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName() {
+        System.out.println("Last Name:");
+        this.lastName = input.nextLine();;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber() {
+        System.out.println("Phone Number:");
+        this.phoneNumber = input.nextLine();
     }
 
     public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress() {
+        this.address = new Address();
     }
 
     @Override
