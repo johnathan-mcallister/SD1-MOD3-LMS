@@ -37,6 +37,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Goodbye.");
+                    System.out.println("**************************************************************************");
                     break;
                 default:
                     System.out.println("Invalid selection. Try again.");
