@@ -1,4 +1,3 @@
-import javax.smartcardio.ATR;
 import java.nio.file.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ public class TestClass {
     public static ArrayList<Patron> patronList = new ArrayList<Patron>();
 
     public static void main(String[] args) {
+        loadPatrons(patronList);
         runPatronMenu();
     }
 
@@ -42,12 +42,13 @@ public class TestClass {
             }
             switch (choice) {
                 case 1:
-                    writeToFile(".\\logs\\patrons.txt", patronList);
+                    System.out.println("Import Patron List - WIP");
                     break;
                 case 2:
                     Patron newPatron = new Patron(patronList);
                     patronList.add(newPatron);
                     System.out.println(newPatron);
+                    writeToFile(".\\logs\\patrons.txt", newPatron);
                     break;
                 case 3:
                     System.out.print("Enter the Patron ID of the patron you would like to remove: ");
@@ -95,70 +96,88 @@ public class TestClass {
         } while (choice != 5);
     }
 
-    public static void writeToFile(String filePath, ArrayList<?> objects) {
+    public static <T> void writeToFile(String filePath, T object) {
+        if (object instanceof Patron) {
+            try {
+                Files.write(Paths.get(filePath), ((Patron) object).serializePatron().getBytes(),
+                        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                System.out.println("File appended successfully.");
+            } catch (IOException e) {
+                System.out.println("Error appending to file: " + e.getMessage());
+            }
+        }/* else if (object instanceof Book) {
+            try {
+                Files.write(Paths.get(filePath), object.getBytes(),
+                        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                System.out.println("File appended successfully.");
+            } catch (IOException e) {
+                System.out.println("Error appending to file: " + e.getMessage());
+            }
+        }*/
+    }
 
-        if (filePath != null && !filePath.isEmpty() && objects != null && !objects.isEmpty()) {
-            objects.forEach(
-                object -> {
-                    if (object instanceof Patron) {
-                        try {
-                            Files.write(Paths.get(filePath), serializePatron((Patron) object).getBytes(),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-                            System.out.println("File appended successfully.");
-                        } catch (IOException e) {
-                            System.out.println("Error appending to file: " + e.getMessage());
-                        }
-                    }/* else if (object instanceof Book) {
-                        try {
-                            Files.write(Paths.get(filePath), object.getBytes(),
-                                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-                            System.out.println("File appended successfully.");
-                        } catch (IOException e) {
-                            System.out.println("Error appending to file: " + e.getMessage());
-                        }
-                    }*/
-                }
-            );
+    public static Patron deserializePatron(String line) {
+        String[] parts = line.split(" - ");
 
+        // Example: UID - First - Last - Phone - Address - Fine - BookIDs
+        Patron p = getPatron(parts);
+
+        // Book IDs would be in parts[6], comma-delimited
+        if (parts.length > 6 && !parts[6].isBlank()) {
+            String[] bookIds = parts[6].split(",");
+            for (String id : bookIds) {
+                // You’d need a lookup to find Book objects by ID
+                Book b = new Book(null, "Unknown", "Unknown", "", id, 0, 0, 1);
+                p.addBook(b);
+            }
         }
 
+        return p;
     }
 
-    // UID - First - Last - Phone - Address - Fine - bookId1,bookId2,...
-    private static String serializePatron(Patron p) {
+    private static Patron getPatron(String[] parts) {
+        String uid     = parts[0].replace("[", "").replace("]", "").trim();
+        String first   = parts[1];
+        String last    = parts[2];
+        String phone   = parts[3];
+        String unitNum = parts[4];
+        String street  = parts[5];
+        String city    = parts[6];
+        String state   = parts[7];
+        String zip     = parts[8];
+        String country = parts[9];
+        double fine    = Double.parseDouble(parts[10]);
 
-        String uid     = safe(p.getUID());
-        String fName   = safe(p.getFirstName());
-        String lName   = safe(p.getLastName());
-        String phone   = safe(p.getPhoneNumber());
-        String address = safe(String.valueOf(p.getAddress()));
-        String fine    = String.format("%.2f", p.getODFine());
-        String books   = joinBookIds(p.getBookList());
-
-        return String.join(" - ", uid, fName, lName, phone, address, fine, books);
+        return new Patron(uid, first, last, phone, unitNum, street, city, state, zip, country, fine);
     }
 
-    private static String safe(String s) {
-        if (s == null) return "";
+    public static void loadPatrons(List<Patron> patronList) {
+        Path filePath = Paths.get(".\\logs\\patrons.txt");
 
-        return s.replace("\r", " ")
-                .replace("\n", " ")
-                .replace(" - ", "—") // prevent confusing the " - " delimiter
-                .trim();
-    }
-
-    private static String joinBookIds(ArrayList<Book> books) {
-        if (books == null || books.isEmpty()) return "";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < books.size(); i++) {
-            Book b = books.get(i);
-            String id = b != null ? b.getBookId() : ""; // ternary operator
-            sb.append(id == null ? "" : id); // ternary operator
-            if (i < books.size() - 1) sb.append(",");
+        if (!Files.exists(filePath)) {
+            System.out.println("No patrons.txt file found. Starting with empty patron list.");
+            return;
         }
-        return sb.toString();
-    }
 
+        try {
+            List<String> lines = Files.readAllLines(filePath);
+
+            if (lines.isEmpty()) {
+                System.out.println("patrons.txt is empty. No patrons loaded.");
+                return;
+            }
+
+            for (String line : lines) {
+                Patron patron = deserializePatron(line);
+                patronList.add(patron);
+            }
+
+            System.out.println("Loaded " + patronList.size() + " patrons from patrons.txt.");
+
+        } catch (IOException e) {
+            System.out.println("Error reading patrons.txt: " + e.getMessage());
+        }
+    }
 }
 
 
