@@ -1,6 +1,7 @@
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 
 public class Patron extends Person{
 
@@ -19,12 +20,19 @@ public class Patron extends Person{
         this.bookList = new ArrayList<>();
     }
 
+    public Patron(String id, String fName, String lName, String phoneNumber, String unitNum, String street, String city, String state, String zipCode, String country, Double odFine) {
+        super(fName, lName, phoneNumber, unitNum, street, city, state, zipCode, country);
+        this.UID = id;
+        this.odFine = odFine;
+        this.bookList = new ArrayList<>();
+    }
+
     public String getUID() {
         return this.UID;
     }
 
     // Generates a 7 character String with a consecutive number that grows as the list of patrons grows
-    public String generateUID(ArrayList<Patron> patronList) {
+    private String generateUID(ArrayList<Patron> patronList) {
         if (patronList == null || patronList.isEmpty()) {
             return "LP00001";
         } else {
@@ -118,12 +126,53 @@ public class Patron extends Person{
         return this.firstName.compareToIgnoreCase(other.firstName);
     }
 
+    // UID - First - Last - Phone - Address - Fine - bookId1,bookId2,...
+    public String serializePatron() {
+
+        String uid     = "[" + safe(this.getUID()) + "]";
+        String fName   = safe(this.getFirstName());
+        String lName   = safe(this.getLastName());
+        String phone   = safe(this.getPhoneNumber());
+        String unitNum = safe(this.getAddress().getUnitNumber());
+        String street  = safe(this.getAddress().getStreet());
+        String city    = safe(this.getAddress().getCity());
+        String state   = safe(this.getAddress().getState());
+        String zip     = safe(this.getAddress().getZip());
+        String country = safe(this.getAddress().getCountry());
+        String fine    = String.format("%.2f", this.getODFine());
+        String books = (this.getBookList() == null || this.getBookList().isEmpty()
+                ? "null\n"
+                : joinBookIds(this.getBookList()) + "\n");
+
+        return String.join(" - ", uid, fName, lName, phone, unitNum, street, city, state, zip, country, fine, books);
+    }
+
+
+
+    // removes new lines and existing hyphens to avoid confusing imports later
+    private static String safe(String s) {
+        if (s == null) return "";
+
+        return s.replace("\r", " ")
+                .replace("\n", " ")
+                .replace(" - ", "—") // prevent confusing the " - " delimiter
+                .trim();
+    }
+
+    private static String joinBookIds(ArrayList<Book> books) {
+        if (books == null || books.isEmpty()) return "";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < books.size(); i++) {
+            Book b = books.get(i);
+            String id = b != null ? b.getBookId() : ""; // ternary operator
+            sb.append(id == null ? "" : id); // ternary operator
+            if (i < books.size() - 1) sb.append(",");
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s, %s - %s",this.UID, super.lastName, super.firstName, super.phoneNumber);
-    }
-
-    public String toStringFull() {
-        return String.format("UID: %s\nNAME: %s, %s\nPHONE: %s\n%s\nBALANCE: $%s\nBOOKLIST: %s",this.UID, super.lastName, super.firstName, super.phoneNumber, super.address, df.format(this.odFine), this.bookList);
     }
 }
