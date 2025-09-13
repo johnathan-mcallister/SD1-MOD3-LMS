@@ -1,6 +1,5 @@
-[LP00001] - Alex - Asher - 555-555-5555 - 1 - Fox Rd - Orlando - FL - 32832 - US - 0.00 - null
-[LP00002] - Adam - Baxter - 555-555-5555 - 2 - Cow St - Orlando - FL - 32832 - US - 10.00 - null
-[LP00003] - Chris - Carter - 555-555-5555 - 3 - Hen Wy - Orlando - FL - 32832 - US - 20.00 - null
-[LP00004] - Frank - Desmond - 555-555-5555 - 4 - Dolphin Cir - Orlando - FL - 32832 - US - 30.00 - null
-[LP00005] - Lloyd - Ericson - 555-555-5555 - 5 - Whale Ave - Orlando - FL - 32832 - US - 40.00 - null
-[LP00006] - Mike - Fisher - 555-555-5555 - 6 - Lemur Blvd - Orlando - FL - 32832 - US - 50.00 - null
+[LP00001] - Alex - Asher - 555-555-5555 - 1 - Fox Rd - Orlando - FL - 32832 - US - 0.00 - Orlando
+[LP00002] - Adam - Baxter - 555-555-5555 - 2 - Cow St - Orlando - FL - 32832 - US - 10.00 - Orlando
+[LP00003] - Chris - Carter - 555-555-5555 - 3 - Hen Wy - Orlando - FL - 32832 - US - 20.00 - Orlando
+[LP00004] - Frank - Desmond - 555-555-5555 - 4 - Dolphin Cir - Orlando - FL - 32832 - US - 30.00 - Orlando
+[LP00005] - Lloyd - Ericson - 555-555-5555 - 5 - Whale Ave - Orlando - FL - 32832 - US - 40.00 - Orlando
