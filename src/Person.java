@@ -25,7 +25,13 @@ public abstract class Person implements Comparable<Person> {
             setPhoneNumber();
             setAddress();
         }
+    }
 
+    public Person(String fName, String lName, String phoneNumber, String unitNum, String street, String city, String state, String zipCode, String country){
+        this.firstName = fName;
+        this.lastName = lName;
+        this.phoneNumber = phoneNumber;
+        this.address = new Address(unitNum, street, city, state, zipCode, country);
     }
 
     public String getFirstName() {
