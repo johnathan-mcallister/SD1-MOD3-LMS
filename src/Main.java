@@ -50,21 +50,21 @@ public class Main {
             System.out.println("*************************************");
             System.out.println("Please choose an option from above to proceed:");
 
-            choice = input.nextInt();
+            choice = input.nextInt(); // only accepts an integer
 
             if (choice < 1 || choice > 4) {
                 System.out.println("Input must be between 1 and 4.");
-                choice = 0;
+                choice = 0; // if value is outside the desired range force the loop
             }
 
             switch (choice) {
-                case 1:
+                case 1: // Add Patron to Patron list, and Append patrons.txt
                     Patron newPatron = new Patron(patronList);
                     patronList.add(newPatron);
                     System.out.println(newPatron);
                     writeToFile(newPatron);
                     break;
-                case 2:
+                case 2: // Remove Patron from Patron list, and overwrite patrons.txt with modified list
                     System.out.print("Enter the Patron ID of the patron you would like to remove: ");
                     String removePatronID = input.nextLine().trim();
 
@@ -83,13 +83,13 @@ public class Main {
                         savePatrons(patronList);
                     }
                     break;
-                case 3:
+                case 3: // write patrons in patronList
                     Collections.sort(patronList);
                     if (!patronList.isEmpty()) {
                         patronList.forEach(System.out::println); //method operator
                     }
                     break;
-                case 4:
+                case 4: // Exit
                     System.out.println("Returning to Main Menu...");
                     break;
                 default:
@@ -98,12 +98,13 @@ public class Main {
 
             if (choice != 4) {
                 System.out.println("\nPress Enter to continue...");
-                input.nextLine();
+                input.nextLine(); // this ensures the enduser has captured the output of their selected action before returning to the menu
             }
 
         } while (choice != 4);
     }
 
+    // Takes in a generic object and determines how to serialize and write to the desired txt file
     public static <T> void writeToFile(T object) {
         if (object instanceof Patron) {
             try {
@@ -124,6 +125,7 @@ public class Main {
         }*/
     }
 
+    // This overwrites the existing txt file with the modified patronsList
     static void savePatrons(List<Patron> patrons) {
         try {
             Path dir = patronFile.getParent();
@@ -149,6 +151,7 @@ public class Main {
         }
     }
 
+    // This will parse the txt file and calls getPatron to undo the formating to convert back into and object
     public static Patron deserializePatron(String line) {
         String[] parts = line.split(" - ");
 
@@ -168,6 +171,7 @@ public class Main {
         return p;
     }
 
+    // This will parse the txt file and calls getPatron to undo the formating to convert back into and object
     private static Patron getPatron(String[] parts) {
         String uid     = parts[0].replace("[", "").replace("]", "").trim();
         String first   = parts[1];
@@ -184,6 +188,7 @@ public class Main {
         return new Patron(uid, first, last, phone, unitNum, street, city, state, zip, country, fine);
     }
 
+    // This will parse the txt file and calls getPatron to undo the formating to convert back into and object
     public static void loadPatrons(List<Patron> patronList) {
         Path filePath = Paths.get(".\\logs\\patrons.txt");
 
