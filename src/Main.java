@@ -22,20 +22,24 @@ import java.util.Scanner;
 
 public class Main {
 
+    // used for collecting responses from end user
     public static final Scanner input = new Scanner(System.in);
+    // instantiating patronList
     public static ArrayList<Patron> patronList = new ArrayList<Patron>();
+    // setting path for text file
     public static final Path patronFile = Path.of(".\\logs\\patrons.txt");
 
     public static void main(String[] args) {
-        loadPatrons(patronList);
-        runPatronMenu();
+        loadPatrons(patronList); // importing text file to memory
+        runPatronMenu(); // opens patron menu
     }
 
     public static void runPatronMenu() {
+
+        // instantiating choice
         int choice = 0;
         do {
-            //System.out.println("\033[h\033[2J");
-            //System.out.flush();
+
             System.out.println("*************************************");
             System.out.println("************ [ PATRONS ] ************");
             System.out.println("*************************************");
@@ -45,16 +49,14 @@ public class Main {
             System.out.println("4. Exit");
             System.out.println("*************************************");
             System.out.println("Please choose an option from above to proceed:");
-            String response = input.nextLine();
-            try {
-                choice = Integer.parseInt(response);
-                if (choice < 1 || choice > 4) {
-                    System.out.println("Input must be between 1 and 4.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.printf("'%s' is an invalid input! Please enter a number.%n", response);
+
+            choice = input.nextInt();
+
+            if (choice < 1 || choice > 4) {
+                System.out.println("Input must be between 1 and 4.");
                 choice = 0;
             }
+
             switch (choice) {
                 case 1:
                     Patron newPatron = new Patron(patronList);
@@ -66,15 +68,7 @@ public class Main {
                     System.out.print("Enter the Patron ID of the patron you would like to remove: ");
                     String removePatronID = input.nextLine().trim();
 
-                    boolean removed = false;
-                    for (int i = 0; i < patronList.size(); i++) {
-                        Patron p = patronList.get(i);
-                        if (p.getUID().equalsIgnoreCase(removePatronID)) {
-                            patronList.remove(i);
-                            removed = true;
-                            break;
-                        }
-                    }
+                    boolean removed = patronList.removeIf(p -> p.getUID().equalsIgnoreCase(removePatronID));
 
                     if (removed) {
                         System.out.printf("Patron [%s] has been removed from the list.%n", removePatronID);
