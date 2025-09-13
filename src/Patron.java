@@ -39,7 +39,7 @@ public class Patron extends Person{
             int max = Integer.parseInt(patronList.getFirst().getUID().substring(2));
             for (Patron patron : patronList) {
                 if (Integer.parseInt(patron.getUID().substring(2)) > max) {
-                    max = Integer.parseInt(patron.getUID());
+                    max = Integer.parseInt(patron.getUID().substring(2));
                 }
             }
             max++;
@@ -141,8 +141,8 @@ public class Patron extends Person{
         String country = safe(this.getAddress().getCountry());
         String fine    = String.format("%.2f", this.getODFine());
         String books = (this.getBookList() == null || this.getBookList().isEmpty()
-                ? "null\n"
-                : joinBookIds(this.getBookList()) + "\n");
+                ? "null"
+                : joinBookIds(this.getBookList()));
 
         return String.join(" - ", uid, fName, lName, phone, unitNum, street, city, state, zip, country, fine, books);
     }
