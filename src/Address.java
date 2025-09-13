@@ -19,6 +19,15 @@ public class Address {
         setCountry();
     }
 
+    public Address(String unitNumber, String street, String city, String state, String zip, String country) {
+        this.unitNumber = unitNumber;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.country = country;
+    }
+
     public String getUnitNumber() {
         return this.unitNumber;
     }
